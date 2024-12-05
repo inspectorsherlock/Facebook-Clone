@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { ThemeProvider } from "./context/ThemeContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,10 +26,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      {/* Apply the dark mode class to the HTML element */}
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider>
+          <div className="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+            {children}
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
